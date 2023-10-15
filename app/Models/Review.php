@@ -14,4 +14,11 @@ class Review extends Model
     public function book() {
         return $this->belongsTo(Book::class);
     }
+
+    protected static function booted()
+    {
+        //força a limpeza de cache quando alguma review do book é atualizada ou deletada. Então mostra o dado mais atual no book.show
+        static::updated(fn (Review $review) => cache()->forget('book:'.$review->book_id));
+        static::deleted(fn (Review $review) => cache()->forget('book:'.$review->book_id));
+    }
 }
