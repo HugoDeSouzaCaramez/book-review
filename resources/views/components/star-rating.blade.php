@@ -1,5 +1,5 @@
 @if ($rating)
-    @for ($i = 1; $i < 6; $i++)
+    @for ($i = 0; $i < 5; $i++)
         {{$i < round($rating) ? '★' : '☆'}}
     @endfor
 @else
