@@ -35,6 +35,7 @@ class BookController extends Controller
         //$books = Cache::remember('books', 3600, fn() => $books->get());
 
         $cacheKey = 'books:'.$filter.':'.$title;
+        //armazenando dados de baixa demanda em cache
         //1 hora
         $books = cache()->remember($cacheKey, 3600, fn() => $books->get());
 
